@@ -1,0 +1,262 @@
+" ダブルクォートをシングルに変換 : cs"'
+" snippet : insert モードで K
+
+syntax on
+
+set number " 行数
+set showmatch " 対応する括弧
+set nobackup " バックアップなし
+
+set expandtab " タブをスペースに置き換え
+set tabstop=4 " タブ幅
+set shiftwidth=4 " autoindentなどの時のタブ幅
+set softtabstop=4 " タブキーで入力したときのタブ幅
+set hlsearch " 検索結果文字列のハイライト
+set laststatus=2 " ステータス常に表示
+set noautoindent
+let mapleader = ","
+
+nnoremap <silent>,cb :set clipboard+=unnamed<CR>
+nnoremap <silent>,n,cb :set clipboard=<CR>
+nnoremap <silent>\r :QuickRun<CR>
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
+" backspace で各種消せるようにする
+set backspace=indent,eol,start
+" swp file を作らない
+set noswapfile
+
+" "" 追加 2016/03/21
+" ビープ音を消す
+set vb t_vb=
+set novisualbell
+" 移動コマンドを使ったとき、行頭に移動しない
+"set nostartofline
+" 文字がない場所にもカーソルを移動できるようにする
+"set virtualedit=all
+
+" "" 追加ここまで
+
+" 複数インデントを可能にする
+vnoremap <silent> > >gv
+vnoremap <silent> < <gv
+
+
+"---------------------------
+" Start Neobundle Settings.
+"---------------------------
+" bundleで管理するディレクトリを指定
+set runtimepath+=~/.vim/bundle/neobundle.vim/
+
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" neobundle自体をneobundleで管理
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundleLazy 'mopp/layoutplugin.vim', { 'autoload' : { 'commands' : 'LayoutPlugin'} }
+
+NeoBundle 'wesleyche/SrcExpl' " ソース参照
+NeoBundle 'majutsushi/tagbar' " タグウィンドウ
+NeoBundle 'Shougo/neocomplcache' " 補完プラグイン
+NeoBundle 'Shougo/neocomplcache-rsense'
+
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'digitaltoad/vim-jade'
+NeoBundle 'slim-template/vim-slim'
+"NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'ujihisa/unite-colorscheme'
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'Shougo/vimproc', {
+\ 'build' : {
+\ 'windows' : 'make -f make_mingw32.mak',
+\ 'cygwin' : 'make -f make_cygwin.mak',
+\ 'mac' : 'make -f make_mac.mak',
+\ 'unix' : 'make -f make_unix.mak',
+\ },
+\ }
+NeoBundle 'keith/swift.vim'
+NeoBundle 'pangloss/vim-javascript'
+
+" end 自動補完
+NeoBundle 'tpope/vim-endwise'
+
+" カラースキーマ
+NeoBundle 'jpo/vim-railscasts-theme'
+"NeoBundle 'nanotech/jellybeans.vim'
+"NeoBundle 'vim-scripts/twilight'
+"NeoBundle 'jonathanfilip/vim-lucius'
+"NeoBundle 'tomasr/molokai'
+"NeoBundle 'vim-scripts/Wombat'
+NeoBundle 'sjl/badwolf'
+NeoBundle 'morhetz/gruvbox'
+
+" java 補完機能
+NeoBundle 'vim-scripts/javacomplete'
+
+" snippet
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-surround'
+
+" typescript
+NeoBundle 'leafgarland/typescript-vim'
+
+autocmd FileType java :setlocal omnifunc=javacomplete#Complete
+autocmd FileType java :setlocal completefunc=javacomplete#CompleteParamsInfo
+
+NeoBundle 'alvan/vim-closetag'
+NeoBundle 'groenewege/vim-less'
+
+NeoBundle 'https://github.com/gnk-sato/insertComments.vim'
+
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" 未インストールのプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
+NeoBundleCheck
+
+
+" シンタックスカスタム
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"let g:syntastic_debug = 1
+
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': ['ruby', 'javascript', 'coffee', 'css', 'scss', 'sass', 'xml', 'yaml', 'json', 'py', 'js'] }
+"let g:syntastic_ruby_checkers = ['mri']
+" rubocopチェック有効にしたい場合 gem install rubocop
+"let g:syntastic_ruby_exec = '/Users/[path to home]/.rbenv/shims/ruby'
+"let g:syntastic_ruby_rubocop_exec = '/Users/Sato/.rbenv/shims/rubocop'
+"let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+
+" closetag
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml"
+
+
+nnoremap <silent> <Leader>uf :<C-u>UniteWithBufferDir -buffer-name=files file file/new<CR>
+"" レジスタ一覧
+nnoremap <silent> <Leader>ur :<C-u>Unite -buffer-name=register register <CR>
+"" 最近使ったファイルの一覧
+nnoremap <silent> <Leader>um :<C-u>Unite file_mru <CR>
+nnoremap <silent> <Leader>uo :<C-u>Unite file_rec <CR>
+
+" rails用設定
+"nnoremap <silent> <Leader>rc :<C-u>Unite file_rec/async:app/controllers/ <CR>
+"nnoremap <silent> <Leader>rfc :<C-u>Unite file file/new -input=app/controllers/ <CR>
+"nnoremap <silent> <Leader>rm :<C-u>Unite file_rec/async:app/models/ <CR>
+"nnoremap <silent> <Leader>rfm :<C-u>Unite file file/new -input=app/models/ <CR>
+"nnoremap <silent> <Leader>rv :<C-u>Unite file_rec/async:app/views/ <CR>
+"nnoremap <silent> <Leader>rfv :<C-u>Uniterfile file/new -input=app/views/ <CR>
+"nnoremap <silent> <Leader>rs :<C-u>Unite file_rec/async:app/assets/stylesheets/ <CR>
+"nnoremap <silent> <Leader>rfs :<C-u>Unite file file/new -input=app/assets/stylesheets/ <CR>
+"nnoremap <silent> <Leader>rj :<C-u>Unite file_rec/async:app/assets/javascripts/ <CR>
+"nnoremap <silent> <Leader>rfj :<C-u>Unite file file/new -input=app/assets/javascripts/ <CR>
+"nnoremap <silent> <Leader>ro :<C-u>Unite file_rec/async:config/ <CR>
+"nnoremap <silent> <Leader>rfo :<C-u>Unite file file/new -input=config/ <CR>
+"nnoremap <silent> <Leader>rl :<C-u>Unite file_rec/async:lib/ <CR>
+"nnoremap <silent> <Leader>rfl :<C-u>Unite file file/new -input=lib/ <CR>
+"nnoremap <silent> <Leader>rr :<C-u>Unite file_rec/async:spec/ <CR>
+"nnoremap <silent> <Leader>rfr :<C-u>Unite file file/new -input=spec/ <CR>
+
+
+" ESCキーを2回押すと終了する
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+" ウィンドウを分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+" ウィンドウを縦に分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+" 初期設定関数を起動する
+au FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()
+" Overwrite settings.
+endfunction
+"colorscheme railscasts
+"colorscheme lucius
+colorscheme gruvbox
+set background=dark
+
+
+
+" rails 系では indent は 2 にする
+"if expand("%:t") =~ ".*\.rb"
+if (expand("%:t") =~ ".*\.rb" || expand("%:t") =~ ".*\.less" || expand("%:t") =~ ".*\.slim")
+    set tabstop=2 " タブ幅
+    set shiftwidth=2 " autoindentなどの時のタブ幅
+    set softtabstop=2 " タブキーで入力したときのタブ幅
+endif
+
+
+" snippet
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/snippets/'
+
+highlight PmenuSel ctermbg=1
+highlight PMenuSbar ctermbg=4
+
+" 補完ウィンドウの設定
+set completeopt=menuone
+"
+" " 補完ウィンドウの設定
+set completeopt=menuone
+"
+" " rsenseでの自動補完機能を有効化
+let g:rsenseUseOmniFunc = 1
+" "let g:rsenseHome = '/usr/local/lib/rsense-0.3'
+"
+" " auto-ctagsを使ってファイル保存時にtagsファイルを更新
+let g:auto_ctags = 1
+"
+" " 起動時に有効化
+let g:neocomplcache_enable_at_startup = 1
+"
+" " 大文字が入力されるまで大文字小文字の区別を無視する
+let g:neocomplcache_enable_smart_case = 1
+"
+" " _(アンダースコア)区切りの補完を有効化
+let g:neocomplcache_enable_underbar_completion = 1
+"
+let g:neocomplcache_enable_camel_case_completion  =  1
+"
+" " 最初の補完候補を選択状態にする
+let g:neocomplcache_enable_auto_select = 1
+"
+" " ポップアップメニューで表示される候補の数
+let g:neocomplcache_max_list = 20
+"
+" " シンタックスをキャッシュするときの最小文字長
+let g:neocomplcache_min_syntax_length = 3
+"
+" " 補完の設定
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+if !exists('g:neocomplete#force_omni_input_patterns')
+   let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+let g:neocomplete#force_omni_input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
+"
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+hi Pmenu ctermbg=4
+hi PmenuSel ctermbg=7
+hi PMenuSbar ctermbg=4
+
+"
