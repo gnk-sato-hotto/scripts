@@ -41,8 +41,9 @@ rbenv rehash
 // confirm rails version
 rails -v
 
-
 // install mysql
-sudo yum install mysql
-sudo yum install mysql-server
+yum install -y mysql
+yum install -y mysql-server
 
+// start mysql
+service mysqld start
