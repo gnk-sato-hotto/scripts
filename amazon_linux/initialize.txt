@@ -1,6 +1,9 @@
 // install rbenv, ruby, rails, and mysql.
 sudo su -
 
+// install nginx
+yum -y install nginx
+
 // install git
 yum -y install git
 
