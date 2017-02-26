@@ -17,6 +17,7 @@ echo 'export PATH="${RBENV_ROOT}/bin:${PATH}"' >> /etc/profile
 echo 'eval "$(rbenv init -)"' >> /etc/profile
 source /etc/profile
 
+
 // confirm rbenv version
 rbenv --version
 
@@ -41,9 +42,17 @@ rbenv rehash
 // confirm rails version
 rails -v
 
+
 // install mysql
 yum install -y mysql
 yum install -y mysql-server
+yum install -y mysql-devel
 
 // start mysql
 service mysqld start
+
+// change ec2-user
+exit
+
+sudo chown -R ec2-user:ec2-user /usr/local/rbenv
+source /etc/profile
