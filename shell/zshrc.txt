@@ -5,6 +5,16 @@ export LSCOLORS=cxfxcxdxbxegedabagacad
 alias rm="rm -i"
 alias ls="ls -G"
 alias fs="find ./ -type f | xargs grep "
+alias mreset="rails db:migrate:reset && rails db:seed_fu"
+alias ll="ls -l"
+alias vi="vim"
+alias aat="~/scripts/shell/apply_all_tabs.sh"
+
+# git 関連
+alias gc="git checkout"
+alias gb="git branch"
+alias gpo="git push origin"
+alias ga="git add ."
 
 # コマンド訂正
 setopt correct
@@ -15,25 +25,5 @@ setopt list_packed
 # 補完候補表示時などにピッピとビープ音をならないように設定
 setopt nolistbeep
 
-# added by Anaconda 2.2.0 installer
-# export PATH="/Users/gnk_sato/anaconda/bin:$HOME/.node/bin:$PATH"
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
-# export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-# export GEM_HOME="/usr/local/gems"
-
-
-# export PATH="$GEM_HOME/bin:$PATH:$HOME/.rvm/bin:$HOME/.rbenv/bin" # Add RVM to PATH for scripting
-#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-# alias brew="env PATH=${PATH/\/Users\/gnk_sato\/\.anaconda\/bin:/} brew"
-
-export NVM_DIR="/Users/g.satoh/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# nvm設定
-#[[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh
-#nvm use default
-#npm_dir=${NVM_PATH}_modules
-#export NODE_PATH=$npm_dir
-
-# 毎回実行しなくていいように設定を反映させるコマンドも書いておく
-#source ~/.nvm/nvm.sh
