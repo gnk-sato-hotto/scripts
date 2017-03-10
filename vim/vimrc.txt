@@ -8,9 +8,9 @@ set showmatch " 対応する括弧
 set nobackup " バックアップなし
 
 set expandtab " タブをスペースに置き換え
-set tabstop=4 " タブ幅
-set shiftwidth=4 " autoindentなどの時のタブ幅
-set softtabstop=4 " タブキーで入力したときのタブ幅
+set tabstop=2 " タブ幅
+set shiftwidth=2 " autoindentなどの時のタブ幅
+set softtabstop=2 " タブキーで入力したときのタブ幅
 set hlsearch " 検索結果文字列のハイライト
 set laststatus=2 " ステータス常に表示
 set noautoindent
@@ -26,21 +26,9 @@ set backspace=indent,eol,start
 " swp file を作らない
 set noswapfile
 
-" "" 追加 2016/03/21
-" ビープ音を消す
-set vb t_vb=
-set novisualbell
-" 移動コマンドを使ったとき、行頭に移動しない
-"set nostartofline
-" 文字がない場所にもカーソルを移動できるようにする
-"set virtualedit=all
-
-" "" 追加ここまで
-
 " 複数インデントを可能にする
 vnoremap <silent> > >gv
 vnoremap <silent> < <gv
-
 
 "---------------------------
 " Start Neobundle Settings.
@@ -67,7 +55,6 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'slim-template/vim-slim'
-"NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'Shougo/neomru.vim'
@@ -80,23 +67,25 @@ NeoBundle 'Shougo/vimproc', {
 \ },
 \ }
 NeoBundle 'keith/swift.vim'
-NeoBundle 'pangloss/vim-javascript'
 
 " end 自動補完
 NeoBundle 'tpope/vim-endwise'
 
 " カラースキーマ
 NeoBundle 'jpo/vim-railscasts-theme'
-"NeoBundle 'nanotech/jellybeans.vim'
-"NeoBundle 'vim-scripts/twilight'
-"NeoBundle 'jonathanfilip/vim-lucius'
-"NeoBundle 'tomasr/molokai'
-"NeoBundle 'vim-scripts/Wombat'
 NeoBundle 'sjl/badwolf'
 NeoBundle 'morhetz/gruvbox'
+NeoBundle 'carakan/new-railscasts-theme'
+NeoBundle 'rhysd/vim-color-spring-night'
+NeoBundle 'tomasiser/vim-code-dark'
+NeoBundle 'Haron-Prime/Antares'
+NeoBundle 'romainl/Apprentice'
+NeoBundle 'jacoborus/tender.vim'
 
 " java 補完機能
 NeoBundle 'vim-scripts/javacomplete'
+" scala用syntax highlight
+NeoBundle 'derekwyatt/vim-scala'
 
 " snippet
 NeoBundle 'Shougo/neocomplcache'
@@ -104,16 +93,23 @@ NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'tpope/vim-surround'
 
-" typescript
+" javascript
 NeoBundle 'leafgarland/typescript-vim'
+NeoBundle "isRuslan/vim-es6"
+
+" マークダウン
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'shime/vim-livedown.git'
 
 autocmd FileType java :setlocal omnifunc=javacomplete#Complete
 autocmd FileType java :setlocal completefunc=javacomplete#CompleteParamsInfo
 
 NeoBundle 'alvan/vim-closetag'
 NeoBundle 'groenewege/vim-less'
-
 NeoBundle 'https://github.com/gnk-sato/insertComments.vim'
+" コメントアウトを簡単に
+NeoBundle 'tomtom/tcomment_vim'
 
 call neobundle#end()
 
@@ -125,23 +121,12 @@ NeoBundleCheck
 
 
 " シンタックスカスタム
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-"let g:syntastic_debug = 1
-
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': ['ruby', 'javascript', 'coffee', 'css', 'scss', 'sass', 'xml', 'yaml', 'json', 'py', 'js'] }
-"let g:syntastic_ruby_checkers = ['mri']
-" rubocopチェック有効にしたい場合 gem install rubocop
-"let g:syntastic_ruby_exec = '/Users/[path to home]/.rbenv/shims/ruby'
-"let g:syntastic_ruby_rubocop_exec = '/Users/Sato/.rbenv/shims/rubocop'
-"let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 
 " closetag
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml"
-
 
 nnoremap <silent> <Leader>uf :<C-u>UniteWithBufferDir -buffer-name=files file file/new<CR>
 "" レジスタ一覧
@@ -149,24 +134,6 @@ nnoremap <silent> <Leader>ur :<C-u>Unite -buffer-name=register register <CR>
 "" 最近使ったファイルの一覧
 nnoremap <silent> <Leader>um :<C-u>Unite file_mru <CR>
 nnoremap <silent> <Leader>uo :<C-u>Unite file_rec <CR>
-
-" rails用設定
-"nnoremap <silent> <Leader>rc :<C-u>Unite file_rec/async:app/controllers/ <CR>
-"nnoremap <silent> <Leader>rfc :<C-u>Unite file file/new -input=app/controllers/ <CR>
-"nnoremap <silent> <Leader>rm :<C-u>Unite file_rec/async:app/models/ <CR>
-"nnoremap <silent> <Leader>rfm :<C-u>Unite file file/new -input=app/models/ <CR>
-"nnoremap <silent> <Leader>rv :<C-u>Unite file_rec/async:app/views/ <CR>
-"nnoremap <silent> <Leader>rfv :<C-u>Uniterfile file/new -input=app/views/ <CR>
-"nnoremap <silent> <Leader>rs :<C-u>Unite file_rec/async:app/assets/stylesheets/ <CR>
-"nnoremap <silent> <Leader>rfs :<C-u>Unite file file/new -input=app/assets/stylesheets/ <CR>
-"nnoremap <silent> <Leader>rj :<C-u>Unite file_rec/async:app/assets/javascripts/ <CR>
-"nnoremap <silent> <Leader>rfj :<C-u>Unite file file/new -input=app/assets/javascripts/ <CR>
-"nnoremap <silent> <Leader>ro :<C-u>Unite file_rec/async:config/ <CR>
-"nnoremap <silent> <Leader>rfo :<C-u>Unite file file/new -input=config/ <CR>
-"nnoremap <silent> <Leader>rl :<C-u>Unite file_rec/async:lib/ <CR>
-"nnoremap <silent> <Leader>rfl :<C-u>Unite file file/new -input=lib/ <CR>
-"nnoremap <silent> <Leader>rr :<C-u>Unite file_rec/async:spec/ <CR>
-"nnoremap <silent> <Leader>rfr :<C-u>Unite file file/new -input=spec/ <CR>
 
 
 " ESCキーを2回押すと終了する
@@ -183,21 +150,23 @@ au FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
 " Overwrite settings.
 endfunction
-"colorscheme railscasts
-"colorscheme lucius
+
 colorscheme gruvbox
 set background=dark
 
-
-
 " rails 系では indent は 2 にする
 "if expand("%:t") =~ ".*\.rb"
-if (expand("%:t") =~ ".*\.rb" || expand("%:t") =~ ".*\.less" || expand("%:t") =~ ".*\.slim")
+let is_ruby   = expand("%:t") =~ ".*\.rb"
+let is_less   = expand("%:t") =~ ".*\.less"
+let is_slim   = expand("%:t") =~ ".*\.slim"
+let is_txt    = expand("%:t") =~ ".*\.txt"
+let is_jsx    = expand("%:t") =~ ".*\.jsx"
+let is_python = expand("%:t") =~ ".*\.py"
+if (is_ruby || is_less || is_slim || is_txt || is_jsx || is_python)
     set tabstop=2 " タブ幅
     set shiftwidth=2 " autoindentなどの時のタブ幅
     set softtabstop=2 " タブキーで入力したときのタブ幅
 endif
-
 
 " snippet
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -245,6 +214,7 @@ let g:neocomplcache_min_syntax_length = 3
 " " 補完の設定
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 if !exists('g:neocomplete#force_omni_input_patterns')
+
    let g:neocomplete#force_omni_input_patterns = {}
 endif
 
@@ -254,9 +224,19 @@ if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+let g:neocomplcache_enable_camel_case_completion = 0
 
 hi Pmenu ctermbg=4
 hi PmenuSel ctermbg=7
 hi PMenuSbar ctermbg=4
 
-"
+" ビープ音を消す
+set visualbell
+set vb t_vb=
+
+" markdown
+let g:quickrun_config = {}
+let g:quickrun_config['markdown'] = {
+      \   'outputter': 'browser'
+      \ }
+let g:livedown_autorun = 1
