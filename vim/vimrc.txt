@@ -229,6 +229,9 @@ let g:neocomplcache_enable_camel_case_completion = 0
 hi Pmenu ctermbg=4
 hi PmenuSel ctermbg=7
 hi PMenuSbar ctermbg=4
+"hi Pmenu ctermbg=4
+"hi PmenuSel ctermbg=24
+"hi PMenuSbar ctermbg=4
 
 " ビープ音を消す
 set visualbell
@@ -240,3 +243,4 @@ let g:quickrun_config['markdown'] = {
       \   'outputter': 'browser'
       \ }
 let g:livedown_autorun = 1
+
