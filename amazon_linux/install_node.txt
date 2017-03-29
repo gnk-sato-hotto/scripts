@@ -1,0 +1,13 @@
+// install nginx
+sudo yum install -y nginx
+
+// curl nvm
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
+
+// source nvm.sh
+source ~/.nvm/nvm.sh
+
+// install node 7
+nvm install v7.0.0
+nvm use 7.0.0
+nvm alias default 7.0.0
