@@ -111,6 +111,10 @@ NeoBundle 'https://github.com/gnk-sato/insertComments.vim'
 " コメントアウトを簡単に
 NeoBundle 'tomtom/tcomment_vim'
 
+NeoBundle "ujihisa/repl.vim"
+NeoBundle "Shougo/vimshell.vim"
+NeoBundle "Shougo/vimproc.vim"
+
 call neobundle#end()
 
 " Required:
@@ -143,6 +147,7 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 " ウィンドウを縦に分割して開く
+"
 au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
 au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
 " 初期設定関数を起動する
