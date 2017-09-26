@@ -1,0 +1,50 @@
+snippet react
+    import React from 'react';
+    
+    export default class Hoge extends React.Component {
+
+        /* Mounting */
+        constructor() {
+            super();
+        }
+        componentWillMount() {
+        }
+        componentDidMount() {
+        }
+
+        /* Updating */
+        componentWillReceiveProps() {
+        }
+        componentWillUpdate() {
+        }
+        componentDidUpdate() {
+        }
+
+        /* Unmouting */
+        componentWillUnmount() {
+        }
+
+        render() {
+          return (
+            <div>
+            </div>
+          );
+        }
+    }
+
+snippet class
+    export default class Hoge {
+        constructor(){
+        }
+    }
+
+snippet chai
+  import _             from 'lodash';
+  import {should}      from 'chai';
+  import {compareDeep} from 'nkdash';
+
+  should();
+  describe('', () => {
+    it('', () => {
+    })  
+  })
