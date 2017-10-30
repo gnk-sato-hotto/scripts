@@ -13,11 +13,13 @@ snippet react
         }
 
         /* Updating */
-        componentWillReceiveProps() {
+        componentWillReceiveProps(nextProps) {
         }
-        componentWillUpdate() {
+        shouldComponentUpdate(nextProps, nextState) {
         }
-        componentDidUpdate() {
+        componentWillUpdate(nextProps, nextState) {
+        }
+        componentDidUpdate(prevProps, prevState) {
         }
 
         /* Unmouting */
@@ -27,6 +29,52 @@ snippet react
         render() {
           return (
             <div>
+            </div>
+          );
+        }
+    }
+
+snippet component
+    import React from 'react';
+    import _ from 'lodash';
+
+    const styles = {
+      style: {},
+    };
+    
+    export default class Hoge extends React.Component {
+        static defaultProps = {
+          style: {},
+          className: '',
+        }
+
+        /* Mounting */
+        constructor() {
+            super();
+        }
+        componentWillMount() {
+        }
+        componentDidMount() {
+        }
+
+        /* Updating */
+        componentWillReceiveProps(nextProps) {
+        }
+        shouldComponentUpdate(nextProps, nextState) {
+        }
+        componentWillUpdate(nextProps, nextState) {
+        }
+        componentDidUpdate(prevProps, prevState) {
+        }
+
+        /* Unmouting */
+        componentWillUnmount() {
+        }
+
+        render() {
+          const style = _.assing({}, styles.style, this.props.style);
+          return (
+            <div style={style} className={this.props.className}>
             </div>
           );
         }
