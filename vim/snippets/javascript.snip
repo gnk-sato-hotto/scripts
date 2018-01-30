@@ -1,92 +1,143 @@
-snippet react
-    import React from 'react';
-    
-    export default class Hoge extends React.Component {
+snippet container
+  import React from 'react';
+  import { connect } from 'react-redux';
 
-        /* Mounting */
-        constructor() {
-            super();
-        }
-        componentWillMount() {
-        }
-        componentDidMount() {
-        }
+  // component
+  import SomeComponent from 'fuga/someComponent';
 
-        /* Updating */
-        componentWillReceiveProps(nextProps) {
-        }
-        shouldComponentUpdate(nextProps, nextState) {
-          return true;
-        }
-        componentWillUpdate(nextProps, nextState) {
-        }
-        componentDidUpdate(prevProps, prevState) {
-        }
+  // actions
+  import { someAction } from 'actions/someAction';
 
-        /* Unmouting */
-        componentWillUnmount() {
-        }
 
-        render() {
-          return (
-            <div>
-            </div>
-          );
-        }
+  function mapStateToProps(state) {
+    return state.hogeReducer;
+  }
+
+  function mapDispatchToProps(dispatch) {
+    return {
+      logout: (someValue) => {
+        dispatch(someAction(someValue))
+      },
+    };
+  }
+
+  export default connect(mapStateToProps, mapDispatchToProps)(SomeComponent)
+
+snippet reducer
+  const initialState = {
+  };
+
+  export default function hogeReducer(state = initialState, action) {
+
+    const currentState = _.cloneDeep(state);
+    switch(action.type) {
+      case 'SOME_ACTION':
+        currentState.someKey = action.someValue;
+        return currentState;
+
+      default:
+        return currentState;
     }
+  }
+
+snippet action
+  export const someAction = (someValue) => {
+    return { 
+      type: 'SOME_ACTION',
+      someValue
+    };
+  };
+
+
+snippet react
+  import React from 'react';
+  
+  export default class Hoge extends React.Component {
+
+    /* Mounting */
+    constructor() {
+      super();
+    }
+    componentWillMount() {
+    }
+    componentDidMount() {
+    }
+
+    /* Updating */
+    componentWillReceiveProps(nextProps) {
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+      return true;
+    }
+    componentWillUpdate(nextProps, nextState) {
+    }
+    componentDidUpdate(prevProps, prevState) {
+    }
+
+    /* Unmouting */
+    componentWillUnmount() {
+    }
+
+    render() {
+      return (
+        <div>
+        </div>
+      );
+    }
+  }
 
 snippet component
-    import React from 'react';
-    import _ from 'lodash';
+  import React from 'react';
+  import _ from 'lodash';
 
-    const styles = {
+  const styles = {
+    style: {},
+  };
+  
+  export default class Hoge extends React.Component {
+    static defaultProps = {
       style: {},
-    };
-    
-    export default class Hoge extends React.Component {
-        static defaultProps = {
-          style: {},
-          className: '',
-        }
-
-        /* Mounting */
-        constructor() {
-            super();
-        }
-        componentWillMount() {
-        }
-        componentDidMount() {
-        }
-
-        /* Updating */
-        componentWillReceiveProps(nextProps) {
-        }
-        shouldComponentUpdate(nextProps, nextState) {
-          return true;
-        }
-        componentWillUpdate(nextProps, nextState) {
-        }
-        componentDidUpdate(prevProps, prevState) {
-        }
-
-        /* Unmouting */
-        componentWillUnmount() {
-        }
-
-        render() {
-          const style = _.assign({}, styles.style, this.props.style);
-          return (
-            <div style={style} className={this.props.className}>
-            </div>
-          );
-        }
+      className: '',
     }
+
+    /* Mounting */
+    constructor() {
+      super();
+    }
+    componentWillMount() {
+    }
+    componentDidMount() {
+    }
+
+    /* Updating */
+    componentWillReceiveProps(nextProps) {
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+      return true;
+    }
+    componentWillUpdate(nextProps, nextState) {
+    }
+    componentDidUpdate(prevProps, prevState) {
+    }
+
+    /* Unmouting */
+    componentWillUnmount() {
+    }
+
+    render() {
+      const style = _.assign({}, styles.style, this.props.style);
+      return (
+        <div style={style} className={this.props.className}>
+        </div>
+      );
+    }
+  }
 
 snippet class
-    export default class Hoge {
-        constructor(){
-        }
+  export default class Hoge {
+    constructor() {
     }
+  }
 
 snippet chai
   import _             from 'lodash';
@@ -103,3 +154,10 @@ snippet chai
 snippet promise
   return new Promise((resolve, reject) => {
   });
+
+snippet svar
+  import variables from '!!sass-variable-loader!variables.scss';
+
+snippet istyles
+  import istyles from 'index.scss'
+
