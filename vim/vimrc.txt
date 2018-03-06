@@ -156,8 +156,9 @@ function! s:unite_my_settings()
 " Overwrite settings.
 endfunction
 
-colorscheme gruvbox
-set background=dark
+" colorscheme gruvbox
+" set background=dark
+colorscheme darkblue
 
 " rails 系では indent は 2 にする
 "if expand("%:t") =~ ".*\.rb"
